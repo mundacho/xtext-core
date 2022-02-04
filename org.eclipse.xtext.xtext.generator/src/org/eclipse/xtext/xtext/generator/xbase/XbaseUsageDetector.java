@@ -13,7 +13,6 @@ import java.util.Set;
 
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xtext.UsedRulesFinder;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 
@@ -35,7 +34,7 @@ public class XbaseUsageDetector {
 		new UsedRulesFinder(usedRules).compute(grammar);
 		for (AbstractRule it : usedRules) {
 			if ("XImportSection".equals(it.getName())
-					&& "org.eclipse.xtext.xbase.Xtype".equals(GrammarUtil.getGrammar(it).getName())) {
+					&& "http://www.eclipse.org/xtext/xbase/Xtype".equals(it.getType().getMetamodel().getEPackage().getNsURI())) {
 				return true;
 			}
 		}
