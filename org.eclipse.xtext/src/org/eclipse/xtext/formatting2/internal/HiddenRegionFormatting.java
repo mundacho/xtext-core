@@ -105,9 +105,25 @@ public class HiddenRegionFormatting implements IHiddenRegionFormatting {
 		return val1 != null ? val1 : val2;
 	}
 
+	
+	public static void main(String[] args) {
+		int otherPriority = 1;
+		int priority = 1;
+//		int strategy = Integer.compare(otherPriority, priority);
+//		int strategy = Integer.compare(otherPriority, priority);
+		
+		test(1,1);
+		test(-1,1);
+	}
+	
+	public static void test(int otherPriority, int priority) {
+		int strategy = otherPriority - priority;
+		System.out.println(strategy);
+	}
+	
 	@Override
 	public void mergeValuesFrom(IHiddenRegionFormatting other) throws ConflictingFormattingException {
-		int strategy = Integer.compare(other.getPriority(), getPriority());
+		int strategy = Integer.compare(other.getPriority(), getPriority()) * Math.max(Math.abs(other.getPriority()), Math.abs(getPriority()));
 		setSpace(merge(getSpace(), other.getSpace(), strategy, "space"));
 		setNewLinesMin(merge(getNewLineMin(), other.getNewLineMin(), strategy, "newLineMin"));
 		setNewLinesDefault(merge(getNewLineDefault(), other.getNewLineDefault(), strategy, "newLineDefault"));
